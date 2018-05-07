@@ -25,7 +25,7 @@ import java.util.Map;
 public class ServicePub {
     
     
-public ArrayList<Pub> getList1() {
+public ArrayList<Pub> getListpub() {
         ArrayList<Pub> listUser = new ArrayList<>();
         ConnectionRequest con = new ConnectionRequest();
 

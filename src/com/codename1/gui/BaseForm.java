@@ -11,6 +11,7 @@ import com.codename1.ui.util.Resources;
 import com.codename1.Service.ServiceUser;
 import com.codename1.Entite.User;
 import static com.codename1.Entite.User.connectedUser;
+import com.codename1.mycompany.MyApplication;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -39,6 +40,10 @@ public class BaseForm extends Form {
             if (isCurrentCalendar()) {
                 calendarImage = selection;
             }
+            Image pubImage = null;
+            if (isCurrentPub()) {
+                calendarImage = selection;
+            }
             
             Image statsImage = null;
             if (isCurrentStats()) {
@@ -56,6 +61,7 @@ public class BaseForm extends Form {
             getToolbar().addComponentToSideMenu(inbox);
             getToolbar().addCommandToSideMenu("Evenements", trendingImage, e -> new EventsForm(res).show());
             getToolbar().addCommandToSideMenu("Reclamations", calendarImage, e -> new ReclamationForm(res).show());
+            getToolbar().addCommandToSideMenu("Publicité", pubImage, e -> MyApplication.showFirst());
 
             ServiceUser s1 = new ServiceUser();
             ArrayList<User> list = s1.getList1();
@@ -87,6 +93,10 @@ public class BaseForm extends Form {
     }
 
     protected boolean isCurrentStats() {
+        return false;
+    }
+    
+    private boolean isCurrentPub() {
         return false;
     }
 }
