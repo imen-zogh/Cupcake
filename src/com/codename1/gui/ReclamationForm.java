@@ -39,6 +39,9 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.layouts.BoxLayout;
 import java.util.ArrayList;
 import static com.codename1.Entite.User.connectedUser;
+import com.codename1.messaging.Message;
+import com.codename1.notifications.LocalNotification;
+import com.codename1.ui.Display;
 import java.util.List;
 
 /**
@@ -142,7 +145,10 @@ public class ReclamationForm extends BaseForm {
                 }
             }
             idp=u.getId();
-        
+        LocalNotification n = new LocalNotification();
+        n.setId("reclmation");
+        n.setAlertBody("Reclamation Envoyer avec success");
+        n.setAlertTitle("Reclamation!");
         
         
         btn1.addActionListener(new ActionListener() {
@@ -150,7 +156,13 @@ public class ReclamationForm extends BaseForm {
             public void actionPerformed(ActionEvent evt) {
                     sr.ajoutRec( connectedUser,idp, txt1.getText());
            Dialog.show("Succés", "Reclamation envoyé ! " , "Ok", null);
-
+            Display.getInstance().scheduleLocalNotification(
+                        n,
+                        System.currentTimeMillis() + 10 * 1000,
+                        LocalNotification.REPEAT_NONE
+                );
+                Message m = new Message(txt1.getText());
+                Display.getInstance().sendMessage(new String[]{"cupcake3a11@gmail.com"}, "Reclamation", m);
         
                 
             }
